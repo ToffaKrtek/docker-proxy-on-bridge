@@ -4,5 +4,5 @@
 
 для перед запуском создать сеть        
 ```
-docker network create alpine-net
+docker network create custom-network
 ```
