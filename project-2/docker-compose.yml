@@ -1,0 +1,29 @@
+version: "3.3"
+
+services: 
+        nginx:
+                image: nginx:latest
+                ports: 
+                        - "82:80"
+                volumes:
+                        - "./hosts:/etc/nginx/conf.d"
+                        - "./www:/var/www"
+                links:
+                        - php_fpm
+                networks:
+                        projects_net:
+                                aliases:
+                                        - project-2
+        php_fpm:
+                build:
+                        context: ./php-fpm
+                volumes: 
+                        - "./www:/var/www"
+                networks:
+                        projects_net:
+                                aliases:
+                                        - project-2-php
+networks:
+        projects_net:
+                external:
+                        name: custom-network
